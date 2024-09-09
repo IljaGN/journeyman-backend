@@ -28,6 +28,7 @@
     <modules>
         <module>journeyman-properties-api</module>
         <module>journeyman-observers-api</module>
+        <module>journeyman-properties</module>
     </modules>
 
     <build>
