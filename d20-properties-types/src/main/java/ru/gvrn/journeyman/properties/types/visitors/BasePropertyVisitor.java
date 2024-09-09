@@ -1,18 +1,18 @@
 package ru.gvrn.journeyman.properties.types.visitors;
 
-public abstract class BaseVisitor implements Visitor {
+public abstract class BasePropertyVisitor implements PropertyVisitor {
   protected final int intValue;
   protected final String strValue;
   protected final boolean booValue;
 
-  public BaseVisitor(int value) {
+  public BasePropertyVisitor(int value) {
     intValue = value;
     strValue = String.valueOf(value);
     booValue = value > 0;
   }
 
-  public BaseVisitor(String value) {
-    if (value == null) { // Blank utils, trim etk
+  public BasePropertyVisitor(String value) {
+    if (value == null) { // TODO: Blank utils, trim etk
       value = "";
     } else if ("true".equalsIgnoreCase(value) || "false".equalsIgnoreCase(value)) {
       booValue = Boolean.parseBoolean(value);
@@ -26,7 +26,7 @@ public abstract class BaseVisitor implements Visitor {
     booValue = intValue > 0;
   }
 
-  public BaseVisitor(boolean value) {
+  public BasePropertyVisitor(boolean value) {
     intValue = value ? 1 : 0;
     strValue = String.valueOf(value);
     booValue = value;
