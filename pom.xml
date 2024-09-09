@@ -30,6 +30,7 @@
         <module>journeyman-observers-api</module>
         <module>journeyman-properties</module>
         <module>journeyman-dicees</module>
+        <module>d20-properties-types</module>
     </modules>
 
     <build>
