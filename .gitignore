@@ -1,6 +1,6 @@
 ### Maven Build Result ###
 build/
-/target/
+target/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
