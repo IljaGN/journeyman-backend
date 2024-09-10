@@ -32,6 +32,7 @@
         <module>journeyman-dicees</module>
         <module>d20-properties-types</module>
         <module>journeyman-characters</module>
+        <module>journeyman-outfits-api</module>
     </modules>
 
     <build>
