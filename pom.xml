@@ -33,6 +33,7 @@
         <module>d20-properties-types</module>
         <module>journeyman-characters</module>
         <module>journeyman-outfits-api</module>
+        <module>dnd-items</module>
     </modules>
 
     <build>
