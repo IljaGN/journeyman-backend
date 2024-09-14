@@ -37,7 +37,9 @@ public class PropertyValue<T> implements Value<T>, Observable {
 
   @Override
   public Value<T> getInstance(String valueName) {
-    return null;
+    Value<T> pv = new PropertyValue<>(valueName, value);
+    pv.setOwnerName(ownerName);
+    return pv;
   }
 
   @Override
