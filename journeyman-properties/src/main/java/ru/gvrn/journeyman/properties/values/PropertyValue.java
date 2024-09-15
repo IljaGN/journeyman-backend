@@ -1,6 +1,7 @@
 package ru.gvrn.journeyman.properties.values;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import ru.gvrn.journeyman.observers.api.Info;
 import ru.gvrn.journeyman.observers.api.Observable;
@@ -15,10 +16,10 @@ public class PropertyValue<T> implements Value<T>, Observable {
   private final List<Observer> observers = new ArrayList<>();
 
   @Getter // TODO: interface UniqueName
-  private final String name;
+  protected final String name;
 
   @Setter
-  private String ownerName;
+  protected String ownerName = "null";
 
   @Getter
   private T value;
@@ -30,7 +31,7 @@ public class PropertyValue<T> implements Value<T>, Observable {
 
   @Override
   public void setValue(T value) {
-    Info info = new PropertyInfo(ownerName, this.value, value);
+    Info info = new PropertyInfo(getPropertyIdentifier(), this.value, value);
     this.value = value;
     notify(info);
   }
@@ -43,7 +44,7 @@ public class PropertyValue<T> implements Value<T>, Observable {
   }
 
   @Override
-  public void add(Observer observer) {
+  public void add(@NonNull Observer observer) {
     observers.add(observer);
   }
 
@@ -58,7 +59,11 @@ public class PropertyValue<T> implements Value<T>, Observable {
   }
 
   @Override
-  public void notify(Info info) {
+  public void notify(@NonNull Info info) {
     observers.forEach(obs -> obs.update(info));
+  }
+
+  protected String getPropertyIdentifier() {
+    return String.format("%s(%s)", ownerName, name);
   }
 }

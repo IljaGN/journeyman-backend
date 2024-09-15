@@ -19,11 +19,11 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class PropertyValueTest {
-  private static final String CURRENT_NAME = "current";
-  private static final String DEFAULT_NAME = "default";
+  static final String CURRENT_NAME = "current";
+  static final String DEFAULT_NAME = "default";
 
-  private static final Object INITIAL_VALUE = "initial value";
-  private static final Object NEW_VALUE = "new value";
+  static final Object INITIAL_VALUE = "initial value";
+  static final Object NEW_VALUE = "new value";
 
   private static final Info INFO = new PropertyInfo(CURRENT_NAME, INITIAL_VALUE, NEW_VALUE);
 
