@@ -110,4 +110,11 @@ class BasePropertyTest {
     result.setOwnerName(PROPERTY_NAME);
     return result;
   }
+
+  private static class TestProperty extends BaseProperty<Object> {
+    @SafeVarargs
+    public TestProperty(String name, Value<Object> currentValue, Value<Object>... values) {
+      super(name, currentValue, values);
+    }
+  }
 }
