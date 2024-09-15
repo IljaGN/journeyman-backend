@@ -4,6 +4,7 @@ public interface Info {
   String getIdentifier();
   Object getOldValue();
   Object getNewValue();
+
   default String getDisplayedIdentifier() {
     return getIdentifier();
   }

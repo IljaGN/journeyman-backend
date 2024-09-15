@@ -4,23 +4,33 @@ import lombok.Getter;
 import ru.gvrn.journeyman.properties.api.Property;
 import ru.gvrn.journeyman.properties.api.Value;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class BaseProperty<T> implements Property<T> {
-  @Getter // TODO: interface UniqueName
+  @Getter
   private final String name;
-  protected final Map<String, Value<T>> values;
+  protected final Map<String, Value<T>> values = new HashMap<>();
   protected final Value<T> defolt;
   protected final Value<T> current;
 
-  public BaseProperty(String name, Value<T> value) {
+  @SafeVarargs
+  public BaseProperty(String name, Value<T>... values) {
+    if (values.length == 0) {
+      throw new IllegalArgumentException(); // TODO: test values
+    }
+
     this.name = name;
-    value.setOwnerName(name);
-    values = new HashMap<>();
-    current = value;
-    defolt = initValue("default");
-    addValues(current, defolt);
+    Arrays.stream(values).forEach(v -> v.setOwnerName(name));
+    current = values[0];
+    if (values.length == 1) {
+      defolt = initValue("default");
+      addValues(current, defolt);
+    } else {
+      defolt = values[1];
+      addValues(values);
+    }
   }
 
   @Override
@@ -47,7 +57,8 @@ public abstract class BaseProperty<T> implements Property<T> {
     return current.getInstance(name);
   }
 
-  protected void addValues(Value<T>... values) {
-//    Arrays.stream(values).forEach(v -> this.values.put(v.getName(), v));
+  @SafeVarargs
+  protected final void addValues(Value<T>... values) {
+    Arrays.stream(values).forEach(v -> this.values.put(v.getName(), v));
   }
 }

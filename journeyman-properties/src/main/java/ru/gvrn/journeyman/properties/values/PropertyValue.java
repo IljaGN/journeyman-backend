@@ -15,7 +15,7 @@ import java.util.List;
 public class PropertyValue<T> implements Value<T>, Observable {
   private final List<Observer> observers = new ArrayList<>();
 
-  @Getter // TODO: interface UniqueName
+  @Getter
   protected final String name;
 
   @Setter

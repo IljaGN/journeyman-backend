@@ -1,6 +1,8 @@
 package ru.gvrn.journeyman.properties.api;
 
-public interface Property<T> {
+import ru.gvrn.journeyman.outfits.api.UniqueName;
+
+public interface Property<T> extends UniqueName {
   T getValue();
   void replaceValue(T value);
   void resetOnDefault();
