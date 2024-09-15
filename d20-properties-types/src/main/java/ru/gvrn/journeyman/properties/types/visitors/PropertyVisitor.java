@@ -8,4 +8,5 @@ public interface PropertyVisitor {
   void visit(IntegerProperty property);
   void visit(StringProperty property);
   void visit(BooleanProperty property);
+//  void visit(IntegerRestrictedProperty property);
 }

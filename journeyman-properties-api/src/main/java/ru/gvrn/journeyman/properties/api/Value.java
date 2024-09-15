@@ -5,6 +5,6 @@ import ru.gvrn.journeyman.outfits.api.UniqueName;
 public interface Value<T> extends UniqueName {
   T getValue();
   void setValue(T value);
-  Value<T> getInstance(String valueName);
+  Value<T> getInstance(String valueName); // Думаю нужно убрать из интерфейса
   void setOwnerName(String name);
 }
