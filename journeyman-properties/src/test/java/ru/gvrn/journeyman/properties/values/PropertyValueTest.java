@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ru.gvrn.journeyman.observers.api.Info;
 import ru.gvrn.journeyman.observers.api.Observer;
 import ru.gvrn.journeyman.properties.PropertyInfo;
+import ru.gvrn.journeyman.properties.api.Value;
 
 import java.util.Arrays;
 
@@ -18,12 +19,12 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class PropertyValueTest {
-  static final String CURRENT_NAME = "current";
-  static final String DEFAULT_NAME = "default";
+public class PropertyValueTest {
+  public static final String CURRENT_NAME = "current";
+  public static final String DEFAULT_NAME = "default";
 
-  static final Object INITIAL_VALUE = "initial value";
-  static final Object NEW_VALUE = "new value";
+  public static final Object INITIAL_VALUE = "initial value";
+  public static final Object NEW_VALUE = "new value";
 
   private static final Info INFO = new PropertyInfo(CURRENT_NAME, INITIAL_VALUE, NEW_VALUE);
 
@@ -58,7 +59,7 @@ class PropertyValueTest {
   public void getInstance_OK() {
     PropertyValue<Object> value = createValue();
 
-    PropertyValue<Object> testValue = (PropertyValue<Object>) value.getInstance(DEFAULT_NAME);
+    Value<Object> testValue = value.getInstance(DEFAULT_NAME);
 
     assertEquals(DEFAULT_NAME, testValue.getName());
     assertEquals(INITIAL_VALUE, testValue.getValue());

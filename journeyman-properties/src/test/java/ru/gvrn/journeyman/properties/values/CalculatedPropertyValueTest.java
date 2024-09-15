@@ -21,7 +21,7 @@ class CalculatedPropertyValueTest {
 
   @ParameterizedTest
   @MethodSource("setDependenciesAndUpdateOkDp")
-  void setDependenciesAndUpdate_split_OK(Function<Info, Object> dependencies) {
+  public void setDependenciesAndUpdate_split_OK(Function<Info, Object> dependencies) {
     CalculatedPropertyValue<Object> value = createValue();
 
     value.setDependencies(dependencies);
@@ -31,7 +31,7 @@ class CalculatedPropertyValueTest {
   }
 
   @Test
-  void setDependenciesAndUpdate_together_OK() {
+  public void setDependenciesAndUpdate_together_OK() {
     CalculatedPropertyValue<Object> value = createValue();
 
     value.setDependenciesAndUpdate(info -> NEW_VALUE);
@@ -40,7 +40,7 @@ class CalculatedPropertyValueTest {
   }
 
   @Test
-  void update_ifDependenciesIsNull_FAIL() {
+  public void update_ifDependenciesIsNull_FAIL() {
     String expOwnerName = "Test Owner";
     CalculatedPropertyValue<Object> value = createValue();
     value.setOwnerName(expOwnerName);

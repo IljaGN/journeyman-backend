@@ -10,25 +10,23 @@ import java.util.Map;
 
 public abstract class BaseProperty<T> implements Property<T> {
   @Getter
-  private final String name;
+  protected final String name;
   protected final Map<String, Value<T>> values = new HashMap<>();
   protected final Value<T> defolt;
   protected final Value<T> current;
 
   @SafeVarargs
-  public BaseProperty(String name, Value<T>... values) {
-    if (values.length == 0) {
-      throw new IllegalArgumentException(); // TODO: test values
-    }
-
+  public BaseProperty(String name, Value<T> currentValue, Value<T>... values) {
     this.name = name;
+    currentValue.setOwnerName(name);
     Arrays.stream(values).forEach(v -> v.setOwnerName(name));
-    current = values[0];
-    if (values.length == 1) {
+    current = currentValue;
+    if (values.length == 0) {
       defolt = initValue("default");
       addValues(current, defolt);
     } else {
-      defolt = values[1];
+      defolt = values[0];
+      addValues(current);
       addValues(values);
     }
   }
