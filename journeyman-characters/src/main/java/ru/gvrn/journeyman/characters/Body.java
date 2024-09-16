@@ -34,10 +34,10 @@ public class Body implements Outfitter<OutfitItem>, Observable {
   }
 
   @Override
-  public List<OutfitItem> unequip(List<String> ids) {
+  public List<OutfitItem> unequip(List<String> uuid) {
     // нужно следить за броней и щитом и при их изменении вызывать notify
     return parts.stream()
-        .filter(bp -> ids.contains(bp.getName()))
+        .filter(bp -> uuid.contains(bp.getName()))
         .map(BodyPart::unequip)
         .collect(Collectors.toList());
   }

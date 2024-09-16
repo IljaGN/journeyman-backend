@@ -49,14 +49,16 @@ class CalculatedPropertyValueTest {
 
     String errMsg = e.getMessage();
     assertTrue(errMsg.contains(expOwnerName));
+    assertTrue(errMsg.contains(CURRENT_NAME));
     assertTrue(errMsg.contains(OBSERVED_PROPERTY_ID));
   }
 
   private static Stream<Arguments> setDependenciesAndUpdateOkDp() {
     final Object objValue = new Object();
-    Function<Info, Object> dependencies1 = info -> objValue;
-    Function<Info, Object> dependencies2 = Info::getNewValue;
-    return Stream.of(Arguments.of(dependencies1), Arguments.of(dependencies2));
+    return Stream.of(
+        Arguments.of((Function<Info, Object>) info -> objValue),
+        Arguments.of((Function<Info, Object>) Info::getNewValue)
+    );
   }
 
   private CalculatedPropertyValue<Object> createValue() {

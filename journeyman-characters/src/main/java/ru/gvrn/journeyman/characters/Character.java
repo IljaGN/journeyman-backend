@@ -29,15 +29,15 @@ public class Character implements Outfitter<OutfitItem> {
 
   @Override
   public List<OutfitItem> equip(List<OutfitItem> outfits) {
-//    items.addAll(outfits);
-//    carryingCapacity.replaceValue(items.stream()
-//        .mapToInt(Item::getWeight).sum()
-//    );
+    outfits.forEach(it -> items.put(it.getUuid(), it));
+    carryingCapacity.replaceValue(items.values().stream()
+        .mapToInt(Item::getWeight).sum()
+    );
     return body.equip(outfits);
   }
 
   @Override
-  public List<OutfitItem> unequip(List<String> ids) {
-    return body.unequip(ids);
+  public List<OutfitItem> unequip(List<String> uuid) {
+    return body.unequip(uuid);
   }
 }
