@@ -26,6 +26,7 @@
         <module>journeyman-outfits-api</module>
         <module>dnd-items</module>
         <module>journeyman-support-api</module>
+        <module>journeyman-engine</module>
     </modules>
 
     <dependencies>
