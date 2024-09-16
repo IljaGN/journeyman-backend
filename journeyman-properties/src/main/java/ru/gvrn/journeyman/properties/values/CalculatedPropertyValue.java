@@ -14,10 +14,13 @@ public class CalculatedPropertyValue<T> extends PropertyValue<T> implements Obse
 
   private Function<Info, T> dependencies;
 
+  public CalculatedPropertyValue(PropertyValue<T> value) {
+    super(value.getName(), value.getValue());
+  }
+
   public CalculatedPropertyValue(String name, T value) {
     super(name, value);
   }
-
 
   public void setDependenciesAndUpdate(@NotNull Function<Info, T> dependencies) {
     setDependencies(dependencies);
