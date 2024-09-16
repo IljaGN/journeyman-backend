@@ -1,0 +1,5 @@
+id,Name,Cost,Weight,Armor,Max Dex Bonus
+6,Padded,500,5000,1,8
+7,Studded leather,2500,10000,3,5
+8,Scale mail,5000,15000,4,3
+9,Full plate,150000,25000,8,1
