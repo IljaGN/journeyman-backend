@@ -1,0 +1,6 @@
+id,Name,Cost,Weight,Size,Damage,Damage Type,Critical Range,Critical Multiplier,Range Increment,Body Slots Tag
+10,Dagger,200,500,M,1D4,piercing|slashing,19|20,2,10,hand
+11,Dagger(punching),200,500,M,1D4,piercing,20,3,0,hand
+12,Mace(light),500,2000,M,1D6,bludgeoning,20,2,0,hand
+13,Sickle,600,1000,M,1D6,slashing,20,2,0,hand
+14,Longspear,500,4500,M,1D8,piercing,20,3,0,hand|hand

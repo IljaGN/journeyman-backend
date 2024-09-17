@@ -5,16 +5,15 @@ import lombok.RequiredArgsConstructor;
 import ru.gvrn.journeyman.items.OutfitItem;
 import ru.gvrn.journeyman.outfits.api.Equippable;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @RequiredArgsConstructor
 public class BodyPart implements Equippable<OutfitItem> {
   @Getter
   private final String name; // unique
-  // TODO: переделать под слот, 1 часть 1 слот, нужно больше дроби на более мелки части например под кольца на пальцы
-  private final Set<String> tags = new HashSet<>(); // не понятно нужна ли действительно если предмет знает все места для экипировки ?
+  @Getter
+  private final String slot;
   private OutfitItem item;
 
   @Override
@@ -32,8 +31,8 @@ public class BodyPart implements Equippable<OutfitItem> {
     return replace(null);
   }
 
-  public void addTag(String tag) {
-    tags.add(tag);
+  public OutfitItem unequip(List<String> uuid) {
+    return uuid.contains(item.getUuid()) ? unequip() : null;
   }
 
   private OutfitItem replace(OutfitItem newOutfit) {

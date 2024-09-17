@@ -37,8 +37,9 @@ public class Body implements Outfitter<OutfitItem>, Observable {
   public List<OutfitItem> unequip(List<String> uuid) {
     // нужно следить за броней и щитом и при их изменении вызывать notify
     return parts.stream()
-        .filter(bp -> uuid.contains(bp.getName()))
-        .map(BodyPart::unequip)
+        .filter(bp -> !bp.isFree())
+        .map(bp -> bp.unequip(uuid))
+        .filter(Objects::nonNull)
         .collect(Collectors.toList());
   }
 

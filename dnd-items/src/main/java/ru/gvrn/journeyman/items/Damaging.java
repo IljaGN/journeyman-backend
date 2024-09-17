@@ -1,5 +1,6 @@
 package ru.gvrn.journeyman.items;
 
+import lombok.Setter;
 import ru.gvrn.journeyman.dicees.api.DicePool;
 import ru.gvrn.journeyman.properties.api.Property;
 
@@ -12,6 +13,9 @@ public class Damaging extends Item {
   public Damaging(Long id, Map<String, Property<?>> properties) {
     super(id, properties);
   }
+
+  @Setter
+  private List<String> slotsNames;
 
   // TODO: это должно быть в каком-то своем модуле но я пока не понял в каком
   public interface Damage {

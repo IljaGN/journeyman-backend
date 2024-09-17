@@ -4,10 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.gvrn.journeyman.dicees.BaseDicePool;
 import ru.gvrn.journeyman.dicees.api.DicePool;
+import ru.gvrn.journeyman.properties.api.Property;
 import ru.gvrn.journeyman.properties.values.CalculatedPropertyValue;
 import ru.gvrn.journeyman.properties.values.PropertyValue;
-
-import javax.annotation.PostConstruct;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,30 +28,33 @@ public class PropertyHandler {
   private final PropertyDefinitionCsvConverter csvConverter;
   private final PropertyPropertyDefinitionConverter propertyConverter;
 
-
-  @PostConstruct
   public void handle() {
     propertyConverter.parse(csvConverter.getPropertyDefinitions());
     Map<String, PropertyAndValueDefinition<Integer>> nameIntegerPropertyMap = propertyConverter.getNameIntegerPropertyMap();
     CH_MOD_MAP.forEach((chName, modName) -> {
-      PropertyValue<Integer> chValue = nameIntegerPropertyMap.get(chName).getValue("current");
+      PropertyValue<Integer> chValue = nameIntegerPropertyMap.get(chName).getValue();
       PropertyAndValueDefinition<Integer> modDefinition = nameIntegerPropertyMap.get(modName);
-      PropertyValue<Integer> modValue = modDefinition.getValue("current");
+      PropertyValue<Integer> modValue = modDefinition.getValue();
       CalculatedPropertyValue<Integer> calcModValue = new CalculatedPropertyValue<>(modValue);
       modDefinition.setValue(calcModValue);
       calcModValue.observe(chValue);
       calcModValue.setDependenciesAndUpdate(info -> calculateModifier(chValue.getValue()));
     });
-    PropertyValue<Integer> level = nameIntegerPropertyMap.get("Level").getValue("current");
+    PropertyValue<Integer> level = nameIntegerPropertyMap.get("Level").getValue();
     PropertyAndValueDefinition<Integer> totalHitPointsDef = nameIntegerPropertyMap.get("Total Hit Points");
-    PropertyValue<Integer> totalHitPoints = totalHitPointsDef.getValue("current");
+    PropertyValue<Integer> totalHitPoints = totalHitPointsDef.getValue();
     CalculatedPropertyValue<Integer> calcTotalHitPoints = new CalculatedPropertyValue<>(totalHitPoints);
     totalHitPointsDef.setValue(calcTotalHitPoints);
     calcTotalHitPoints.observe(level);
     DicePool hpd = new BaseDicePool(level.getValue(), 8);
-    calcTotalHitPoints.setDependencies(info ->
+    calcTotalHitPoints.setDependenciesAndUpdate(info ->
         level.getValue() == 1 ? hpd.getMaxDiceEdge() : hpd.rollAndGetValue()
     );
+  }
+
+  public Map<String, Property<?>> getPropertyMap() {
+    handle();
+    return propertyConverter.getAllProperties();
   }
 
   private static int calculateModifier(int characteristic) {

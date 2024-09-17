@@ -17,13 +17,13 @@ public class Character implements Outfitter<OutfitItem> {
   protected final Map<String, Item> items = new HashMap<>();
   protected final Body body;
 
-  private IntegerRestrictedProperty carryingCapacity;
+  private IntegerProperty carryingCapacity; //IntegerRestrictedProperty
   private IntegerProperty armorClass;
 
   public Character(Map<String, Property<?>> characteristics, Body body) {
     this.characteristics = characteristics;
     this.body = body;
-    carryingCapacity = (IntegerRestrictedProperty) characteristics.get("Carrying Capacity");
+    carryingCapacity = (IntegerProperty) characteristics.get("Carrying Capacity");
     armorClass = (IntegerProperty) characteristics.get("Armor Class");
   }
 

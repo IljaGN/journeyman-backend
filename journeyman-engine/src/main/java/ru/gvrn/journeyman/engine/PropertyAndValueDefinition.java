@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import ru.gvrn.journeyman.properties.values.PropertyValue;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +16,16 @@ public class PropertyAndValueDefinition<T> {
   private final Class<?> type;
   private final Map<String, PropertyValue<T>> nameValueMap = new HashMap<>();
 
+  public PropertyValue<T> getValue() {
+    return nameValueMap.get("current");
+  }
+
   public PropertyValue<T> getValue(String valueName) {
     return nameValueMap.get(valueName);
+  }
+
+  public Collection<PropertyValue<T>> getValues() {
+    return nameValueMap.values();
   }
 
   public void setValue(PropertyValue<T> value) {
