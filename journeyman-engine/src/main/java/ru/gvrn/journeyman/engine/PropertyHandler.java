@@ -15,7 +15,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class PropertyHandler {
   private static final Map<String, String> CH_MOD_MAP = new HashMap<>();
-
   static {
     CH_MOD_MAP.put("Strength", "STR");
     CH_MOD_MAP.put("Dexterity", "DEX");
@@ -48,7 +47,7 @@ public class PropertyHandler {
     calcTotalHitPoints.observe(level);
     DicePool hpd = new BaseDicePool(level.getValue(), 8);
     calcTotalHitPoints.setDependenciesAndUpdate(info ->
-        level.getValue() == 1 ? hpd.getMaxDiceEdge() : hpd.rollAndGetValue()
+        level.getValue() == 1 ? hpd.getMaxDiceEdge() : calcTotalHitPoints.getValue() + hpd.rollAndGetValue()
     );
   }
 

@@ -1,0 +1,4 @@
+name,type,value
+String,1,test_value
+Integer,2,5
+Boolean,3,true

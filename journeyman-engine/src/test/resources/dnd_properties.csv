@@ -1,0 +1,20 @@
+name,type,value
+Character Name,1,Empty Name
+Class,1,Empty Class
+Size,1,M
+Level,2,1
+Strength,2,10
+Dexterity,2,10
+Constitution,2,10
+Intelligence,2,10
+Wisdom,2,10
+Charisma,2,10
+STR,2,0
+DEX,2,0
+CON,2,0
+INT,2,0
+WIS,2,0
+CHA,2,0
+Total Hit Points,2,0
+Speed,2,20
+Carrying Capacity,2,0

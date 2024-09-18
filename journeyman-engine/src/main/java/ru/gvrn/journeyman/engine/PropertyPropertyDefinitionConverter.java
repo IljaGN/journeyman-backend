@@ -80,11 +80,7 @@ public class PropertyPropertyDefinitionConverter {
       Collection<? extends PropertyValue<?>> anotherValues = def.getValues();
       anotherValues.remove(current);
       Constructor<?>[] constructors = propertyClass.getDeclaredConstructors();
-      PropertyValue<?> copyCurrent = new PropertyValue<>(current.getName(), current.getValue()); // TODO работает только на примитивы
-      Collection<? extends PropertyValue<?>> copyValues = anotherValues.stream()
-          .map(v -> new PropertyValue<>(v.getName(), v.getValue()))
-          .collect(Collectors.toList());
-      Property<?> property = createProperty(constructors, name, copyCurrent, copyValues);
+      Property<?> property = createProperty(constructors, name, current, anotherValues);
       result.put(name, property);
     });
     return result;
@@ -100,6 +96,6 @@ public class PropertyPropertyDefinitionConverter {
     for (int i = 1; iterator.hasNext(); i++) {
       args[i] = iterator.next();
     }
-    return (Property<?>) constructors[anotherValues.size()].newInstance(args);
+    return (Property<?>) constructors[anotherValues.size()].newInstance(args); // TODO:not save
   }
 }
