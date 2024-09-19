@@ -13,7 +13,7 @@ public class BodyPart implements Equippable<OutfitItem> {
   @Getter
   private final String name; // unique
   @Getter
-  private final String slot;
+  private final String slotId;
   private OutfitItem item;
 
   @Override

@@ -12,6 +12,7 @@ import java.util.UUID;
 // Просто предметы, монеты они вроде не экипируются и просто лежат в инвентаре, у них два свойства цена и вес
 @RequiredArgsConstructor
 public class Item {
+  @Getter
   protected final Long linealId;
   @Getter
   protected final String uuid;

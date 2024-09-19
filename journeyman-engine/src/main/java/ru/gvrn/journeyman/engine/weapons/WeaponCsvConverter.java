@@ -71,9 +71,9 @@ public class WeaponCsvConverter {
         properties.put(ITEM_SIZE, createProperty(ITEM_SIZE, size));
         properties.put(WEAPON_DAMAGE, createProperty(WEAPON_DAMAGE, damage));
         DamagingOutfitItem weapon = new DamagingOutfitItem(id, properties);
-        weapon.setSlotsNames(List.of("hand"));
+        weapon.setSlotIds(List.of("hand"));
         if ("Longspear".equals(name)) {
-          weapon.setSlotsNames(List.of("hand", "hand"));
+          weapon.setSlotIds(List.of("hand", "hand"));
         }
         return weapon;
       });

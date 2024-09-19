@@ -16,6 +16,7 @@ import javax.annotation.PostConstruct;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -61,7 +62,7 @@ public class OutfitItemHolder extends BaseCsvParser {
       properties.put(ARMOR_ARMOR, createProperty(ARMOR_ARMOR, armor));
       properties.put(ARMOR_MAX_DEX_BONUS, createProperty(ARMOR_MAX_DEX_BONUS, maxDexBonus));
       OutfitItem outfitItem = new OutfitItem(extractLongId(record), properties);
-      outfitItem.setSlotsNames(Collections.singletonList("body")); // TODO:
+      outfitItem.setSlotIds(List.of("body")); // TODO:
       return outfitItem;
     }
   }
