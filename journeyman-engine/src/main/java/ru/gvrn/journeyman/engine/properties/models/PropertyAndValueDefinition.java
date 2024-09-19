@@ -1,4 +1,4 @@
-package ru.gvrn.journeyman.engine;
+package ru.gvrn.journeyman.engine.properties.models;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class PropertyAndValueDefinition<T> {
   private final Map<String, PropertyValue<T>> nameValueMap = new HashMap<>();
 
   public PropertyValue<T> getValue() {
-    return nameValueMap.get("current");
+    return getValue("current");
   }
 
   public PropertyValue<T> getValue(String valueName) {

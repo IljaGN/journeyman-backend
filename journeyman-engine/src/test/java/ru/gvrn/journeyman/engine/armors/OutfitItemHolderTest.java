@@ -20,23 +20,23 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestExecutionListeners(DependencyInjectionTestExecutionListener.class)
 @BootstrapWith(DefaultTestContextBootstrapper.class)
 @ContextConfiguration(classes = EngineApp.class)
-class ArmorCsvConverterTest {
+class OutfitItemHolderTest {
 
   @Autowired
-  private ArmorCsvConverter converter;
+  private OutfitItemHolder holder;
 
   @Test
   public void loadAndParseResources_OK() {
     for (long id = 6L; id < 10L; id++) {
-      assertNotNull(converter.getOutfitItemById(id));
+      assertNotNull(holder.getOutfitItemById(id));
     }
   }
 
   @ParameterizedTest
   @CsvSource({"7,Studded leather,2500,10000,3,5", "9,Full plate,150000,25000,8,1"})
   public void getOutfitItemById_OK(Long id, String armorName, int cost, int weight) {
-    OutfitItem outfitItem = converter.getOutfitItemById(id);
-    OutfitItem copyOutfitItem = converter.getOutfitItemById(id);
+    OutfitItem outfitItem = holder.getOutfitItemById(id);
+    OutfitItem copyOutfitItem = holder.getOutfitItemById(id);
 
     assertNotNull(outfitItem.getUuid());
     assertEquals(cost, outfitItem.getCost());

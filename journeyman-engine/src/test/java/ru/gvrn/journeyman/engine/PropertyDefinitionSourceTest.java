@@ -10,6 +10,8 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.DefaultTestContextBootstrapper;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import ru.gvrn.journeyman.engine.properties.PropertyDefinitionSource;
+import ru.gvrn.journeyman.engine.properties.models.PropertyDefinition;
 
 import java.util.NoSuchElementException;
 
@@ -19,15 +21,15 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestExecutionListeners(DependencyInjectionTestExecutionListener.class)
 @BootstrapWith(DefaultTestContextBootstrapper.class)
 @ContextConfiguration(classes = EngineApp.class)
-class PropertyDefinitionCsvConverterTest {
+class PropertyDefinitionSourceTest {
 
   @Autowired
-  private PropertyDefinitionCsvConverter converter;
+  private PropertyDefinitionSource definitionSource;
 
   @ParameterizedTest
   @CsvSource({"String,1,test_value", "Integer,2,5", "Boolean,3,true"})
   public void getPropertyDefinitions_OK(String name, String type, String value) {
-    PropertyDefinition definition = converter.getPropertyDefinitions().stream()
+    PropertyDefinition definition = definitionSource.getPropertyDefinitions().stream()
         .filter(def -> name.equals(def.getName()))
         .findFirst().orElseThrow(() ->
             new NoSuchElementException(String.format("Element with name '%s' not found", name))

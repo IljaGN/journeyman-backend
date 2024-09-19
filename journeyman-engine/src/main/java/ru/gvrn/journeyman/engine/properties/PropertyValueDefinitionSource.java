@@ -1,9 +1,13 @@
-package ru.gvrn.journeyman.engine;
+package ru.gvrn.journeyman.engine.properties;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 import ru.gvrn.journeyman.dicees.api.DicePool;
+import ru.gvrn.journeyman.engine.properties.models.PropertyAndValueDefinition;
+import ru.gvrn.journeyman.engine.properties.models.PropertyDefinition;
 import ru.gvrn.journeyman.properties.api.Property;
 import ru.gvrn.journeyman.properties.types.BooleanProperty;
 import ru.gvrn.journeyman.properties.types.IntegerProperty;
@@ -16,11 +20,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Getter
 @Component
-public class PropertyPropertyDefinitionConverter {
+@RequiredArgsConstructor
+public class PropertyValueDefinitionSource {
   private static final String PROPERTY_TYPE_SPECIAL = "0";
   private static final String PROPERTY_TYPE_STRING = "1";
   private static final String PROPERTY_TYPE_INTEGER = "2";
@@ -30,6 +34,13 @@ public class PropertyPropertyDefinitionConverter {
   private final Map<String, PropertyAndValueDefinition<DicePool>> nameDicePoolPropertyMap = new HashMap<>();
   private final Map<String, PropertyAndValueDefinition<Integer>> nameIntegerPropertyMap = new HashMap<>();
   private final Map<String, PropertyAndValueDefinition<String>> nameStringPropertyMap = new HashMap<>();
+
+  @Getter(AccessLevel.NONE)
+  private final PropertyDefinitionSource definitionSource;
+
+  public void parse() {
+    parse(definitionSource.getPropertyDefinitions());
+  }
 
   public void parse(List<PropertyDefinition> definitions) {
     for (PropertyDefinition definition : definitions) {

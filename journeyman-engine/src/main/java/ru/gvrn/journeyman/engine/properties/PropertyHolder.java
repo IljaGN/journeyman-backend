@@ -1,9 +1,11 @@
-package ru.gvrn.journeyman.engine;
+package ru.gvrn.journeyman.engine.properties;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import ru.gvrn.journeyman.characters.Body;
 import ru.gvrn.journeyman.dicees.BaseDicePool;
 import ru.gvrn.journeyman.dicees.api.DicePool;
+import ru.gvrn.journeyman.engine.properties.models.PropertyAndValueDefinition;
 import ru.gvrn.journeyman.properties.api.Property;
 import ru.gvrn.journeyman.properties.values.CalculatedPropertyValue;
 import ru.gvrn.journeyman.properties.values.PropertyValue;
@@ -13,7 +15,7 @@ import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
-public class PropertyHandler {
+public class PropertyHolder {
   private static final Map<String, String> CH_MOD_MAP = new HashMap<>();
   static {
     CH_MOD_MAP.put("Strength", "STR");
@@ -24,11 +26,10 @@ public class PropertyHandler {
     CH_MOD_MAP.put("Charisma", "CHA");
   }
 
-  private final PropertyDefinitionCsvConverter csvConverter;
-  private final PropertyPropertyDefinitionConverter propertyConverter;
+  private final PropertyValueDefinitionSource propertyConverter;
 
-  public void handle() {
-    propertyConverter.parse(csvConverter.getPropertyDefinitions());
+  public void handle(Body body) {
+    propertyConverter.parse();
     Map<String, PropertyAndValueDefinition<Integer>> nameIntegerPropertyMap = propertyConverter.getNameIntegerPropertyMap();
     CH_MOD_MAP.forEach((chName, modName) -> {
       PropertyValue<Integer> chValue = nameIntegerPropertyMap.get(chName).getValue();
@@ -52,7 +53,6 @@ public class PropertyHandler {
   }
 
   public Map<String, Property<?>> getPropertyMap() {
-    handle();
     return propertyConverter.getAllProperties();
   }
 

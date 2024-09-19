@@ -16,13 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestExecutionListeners(DependencyInjectionTestExecutionListener.class)
 @BootstrapWith(DefaultTestContextBootstrapper.class)
 @ContextConfiguration(classes = EngineApp.class)
-class CharacterHandlerTest {
+class CharacterHolderTest {
 
   @Autowired
-  private CharacterHandler characterHandler;
+  private CharacterHolder characterHolder;
 
   @Test
   public void test() {
-    assertNotNull(characterHandler.createCharacter());
+    assertNotNull(characterHolder.createCharacter());
   }
 }

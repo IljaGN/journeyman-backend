@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import ru.gvrn.journeyman.engine.properties.PropertyValueDefinitionSource;
+import ru.gvrn.journeyman.engine.properties.models.PropertyDefinition;
 import ru.gvrn.journeyman.properties.api.Property;
 import ru.gvrn.journeyman.properties.types.BooleanProperty;
 import ru.gvrn.journeyman.properties.types.IntegerProperty;
@@ -14,14 +16,14 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PropertyPropertyDefinitionConverterTest {
+class PropertyValueDefinitionSourceTest {
   @ParameterizedTest
   @MethodSource("parseOkDp")
   public void parse_OK(PropertyDefinition definition, Class<?> expPropertyType, Object expValue) {
-    PropertyPropertyDefinitionConverter converter = new PropertyPropertyDefinitionConverter();
-    converter.parse(List.of(definition));
+    PropertyValueDefinitionSource definitionSource = new PropertyValueDefinitionSource(null);
+    definitionSource.parse(List.of(definition));
 
-    Property<?> property = converter.getAllProperties().get(definition.getName());
+    Property<?> property = definitionSource.getAllProperties().get(definition.getName());
 
     assertNotNull(property);
     assertEquals(definition.getName(), property.getName());
@@ -33,11 +35,11 @@ class PropertyPropertyDefinitionConverterTest {
   public void getAllProperties_OK() {
     String expValue = "test_value";
     PropertyDefinition definition = new PropertyDefinition("String", "1", expValue);
-    PropertyPropertyDefinitionConverter converter = new PropertyPropertyDefinitionConverter();
-    converter.parse(List.of(definition));
+    PropertyValueDefinitionSource definitionSource = new PropertyValueDefinitionSource(null);
+    definitionSource.parse(List.of(definition));
 
-    Property<?> property1 = converter.getAllProperties().get(definition.getName());
-    Property<?> property2 = converter.getAllProperties().get(definition.getName());
+    Property<?> property1 = definitionSource.getAllProperties().get(definition.getName());
+    Property<?> property2 = definitionSource.getAllProperties().get(definition.getName());
 
     assertNotNull(property2);
     assertEquals(definition.getName(), property2.getName());

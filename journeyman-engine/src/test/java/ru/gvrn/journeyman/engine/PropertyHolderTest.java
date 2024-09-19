@@ -10,6 +10,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.DefaultTestContextBootstrapper;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import ru.gvrn.journeyman.engine.properties.PropertyHolder;
 import ru.gvrn.journeyman.properties.api.Property;
 
 import java.util.HashMap;
@@ -23,16 +24,16 @@ import static org.junit.jupiter.api.Assertions.*;
 @BootstrapWith(DefaultTestContextBootstrapper.class)
 @TestPropertySource(properties = "dnd_properties.csv")
 @ContextConfiguration(classes = EngineApp.class)
-class PropertyHandlerTest {
+class PropertyHolderTest {
 
   @Autowired
-  private PropertyHandler propertyHandler;
+  private PropertyHolder propertyHolder;
 
   @Test
   public void linkProperties_isCorrect() {
     Map<String, Object> expNameValueMap = getModValuesMap();
     Map<String, Object> actNameValueMap = getChValuesMap();
-    Map<String, Property> namePropertyMap = propertyHandler.getPropertyMap().entrySet().stream()
+    Map<String, Property> namePropertyMap = propertyHolder.getPropertyMap().entrySet().stream()
         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
     actNameValueMap.forEach((name, value) -> namePropertyMap.get(name).replaceValue(value));

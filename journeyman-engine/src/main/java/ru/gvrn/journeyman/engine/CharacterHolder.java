@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.gvrn.journeyman.characters.Body;
 import ru.gvrn.journeyman.characters.BodyPart;
 import ru.gvrn.journeyman.characters.Character;
-import ru.gvrn.journeyman.properties.api.Property;
+import ru.gvrn.journeyman.engine.properties.PropertyHolder;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +14,8 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class CharacterHandler {
+public class CharacterHolder {
   private static final Map<String, String> BODY_PART_DEPENDENCY_MAP = new HashMap<>();
-
   static {
     BODY_PART_DEPENDENCY_MAP.put("head", "head");
     BODY_PART_DEPENDENCY_MAP.put("left_hand", "hand");
@@ -25,13 +24,13 @@ public class CharacterHandler {
     BODY_PART_DEPENDENCY_MAP.put("legs", "leg");
   }
 
-  private final PropertyHandler propertyHandler;
+  private final PropertyHolder propertyHandler;
 
   public Character createCharacter() {
-    Map<String, Property<?>> namePropertyMap = propertyHandler.getPropertyMap();
     Body body = new Body();
     getBodyParts().forEach(body::add);
-    return new Character(namePropertyMap, body);
+    propertyHandler.handle(body);
+    return new Character(propertyHandler.getPropertyMap(), body);
   }
 
   private List<BodyPart> getBodyParts() {

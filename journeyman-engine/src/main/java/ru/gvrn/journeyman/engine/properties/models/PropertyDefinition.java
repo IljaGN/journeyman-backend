@@ -1,4 +1,4 @@
-package ru.gvrn.journeyman.engine;
+package ru.gvrn.journeyman.engine.properties.models;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
