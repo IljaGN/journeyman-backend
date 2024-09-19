@@ -4,6 +4,7 @@ import lombok.Setter;
 import ru.gvrn.journeyman.outfits.api.Equippable;
 import ru.gvrn.journeyman.outfits.api.Outfit;
 import ru.gvrn.journeyman.properties.api.Property;
+import ru.gvrn.journeyman.properties.types.IntegerProperty;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,12 +18,16 @@ public class OutfitItem extends Item implements Outfit<OutfitItem> {
   // Он может быть двуручным/одноручным или терять возможность быть экипированным
 
   //    protected Map<String, BaseProperty> ownerCharacteristics; // final
+  private final IntegerProperty armor;
+  private final IntegerProperty maxDexBonus;
 
   @Setter
   private List<String> slotsNames;
 
   public OutfitItem(Long id, Map<String, Property<?>> properties) {
     super(id, properties);
+    this.armor = (IntegerProperty) properties.get("Armor");
+    this.maxDexBonus = (IntegerProperty) properties.get("Max Dex Bonus");
   }
 
   @Override
@@ -39,5 +44,13 @@ public class OutfitItem extends Item implements Outfit<OutfitItem> {
     }
 
     return Collections.singletonList(this);
+  }
+
+  public Integer getArmor() {
+    return armor.getValue();
+  }
+
+  public Integer getMaxDexBonus() {
+    return maxDexBonus.getValue();
   }
 }

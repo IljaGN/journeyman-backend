@@ -1,6 +1,5 @@
 package ru.gvrn.journeyman.items;
 
-import lombok.Setter;
 import ru.gvrn.journeyman.dicees.api.DicePool;
 import ru.gvrn.journeyman.properties.api.Property;
 
@@ -9,13 +8,16 @@ import java.util.Map;
 
 // Предметы способные наносить урон, Оружие, Щит, бомбочки. Они получается могут быть как экипируемые так и нет
 // Возможно нужна композиция на базе Item
-public class Damaging extends Item {
-  public Damaging(Long id, Map<String, Property<?>> properties) {
+public class DamagingItem extends Item { // и нужен интерфейс Damaging
+  public DamagingItem(Long id, Map<String, Property<?>> properties) {
     super(id, properties);
   }
 
-  @Setter
-  private List<String> slotsNames;
+  // Метод возвращающий урон
+
+
+
+
 
   // TODO: это должно быть в каком-то своем модуле но я пока не понял в каком
   public interface Damage {

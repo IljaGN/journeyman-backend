@@ -5,7 +5,7 @@ import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-import ru.gvrn.journeyman.items.Damaging;
+import ru.gvrn.journeyman.items.DamagingOutfitItem;
 import ru.gvrn.journeyman.properties.api.Property;
 import ru.gvrn.journeyman.properties.types.BooleanProperty;
 import ru.gvrn.journeyman.properties.types.IntegerProperty;
@@ -41,7 +41,7 @@ public class WeaponCsvConverter {
       ITEM_SIZE, WEAPON_DAMAGE, WEAPON_DAMAGE_TYPE, WEAPON_CRITICAL_RANGE, WEAPON_CRITICAL_MULTIPLIER, WEAPON_RANGE_INCREMENT//, "Body Slots Tag"
   };
 
-  private final Map<Long, Supplier<Damaging>> idWeaponMap = new HashMap<>();
+  private final Map<Long, Supplier<DamagingOutfitItem>> idWeaponMap = new HashMap<>();
 
   @Value("dnd_weapons.csv")
   private ClassPathResource weaponsResource;
@@ -70,7 +70,7 @@ public class WeaponCsvConverter {
         properties.put(ITEM_WEIGHT, createProperty(ITEM_WEIGHT, weight));
         properties.put(ITEM_SIZE, createProperty(ITEM_SIZE, size));
         properties.put(WEAPON_DAMAGE, createProperty(WEAPON_DAMAGE, damage));
-        Damaging weapon = new Damaging(id, properties);
+        DamagingOutfitItem weapon = new DamagingOutfitItem(id, properties);
         weapon.setSlotsNames(List.of("hand"));
         if ("Longspear".equals(name)) {
           weapon.setSlotsNames(List.of("hand", "hand"));
@@ -80,7 +80,7 @@ public class WeaponCsvConverter {
     }
   }
 
-  public Damaging getWeaponById(Long id) {
+  public DamagingOutfitItem getWeaponById(Long id) {
     return idWeaponMap.get(id).get();
   }
 

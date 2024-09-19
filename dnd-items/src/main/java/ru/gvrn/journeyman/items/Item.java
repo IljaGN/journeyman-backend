@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import ru.gvrn.journeyman.properties.api.Property;
 import ru.gvrn.journeyman.properties.types.IntegerProperty;
+import ru.gvrn.journeyman.properties.types.StringProperty;
 
 import java.util.Map;
 import java.util.UUID;
@@ -15,6 +16,7 @@ public class Item {
   @Getter
   protected final String uuid;
   protected final Map<String, Property<?>> properties; // linealName, name
+  protected final StringProperty linealName;
   protected final IntegerProperty weight;
   protected final IntegerProperty cost;
 
@@ -22,8 +24,13 @@ public class Item {
     this.linealId = id;
     this.uuid = UUID.randomUUID().toString();
     this.properties = properties;
+    this.linealName = (StringProperty) properties.get("Name");
     this.weight = (IntegerProperty) properties.get("Weight");
     this.cost = (IntegerProperty) properties.get("Cost");
+  }
+
+  public String getLinealName() {
+    return linealName.getValue();
   }
 
   public Integer getWeight() {
