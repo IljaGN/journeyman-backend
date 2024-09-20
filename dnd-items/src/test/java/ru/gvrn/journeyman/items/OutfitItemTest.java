@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class OutfitItemTest {
+public class OutfitItemTest {
   private static final int TEST_ARMOR = 4;
   private static final int TEST_DEX_BONUS = 6;
 
@@ -94,9 +94,13 @@ class OutfitItemTest {
   }
 
   public static Map<String, Property<?>> createProperties() {
+    return createProperties(TEST_ARMOR, TEST_DEX_BONUS);
+  }
+
+  public static Map<String, Property<?>> createProperties(int armor, int dexBonus) {
     Map<String, Property<?>> properties = new HashMap<>(ItemTest.createProperties());
-    properties.put("Armor", new IntegerProperty("Armor", new PropertyValue<>("current", TEST_ARMOR)));
-    properties.put("Max Dex Bonus", new IntegerProperty("Max Dex Bonus", new PropertyValue<>("current", TEST_DEX_BONUS)));
+    properties.put("Armor", new IntegerProperty("Armor", new PropertyValue<>("current", armor)));
+    properties.put("Max Dex Bonus", new IntegerProperty("Max Dex Bonus", new PropertyValue<>("current", dexBonus)));
     return properties;
   }
 
