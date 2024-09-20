@@ -35,6 +35,14 @@ public class BodyPart implements Equippable<OutfitItem> {
     return uuid.contains(item.getUuid()) ? unequip() : null;
   }
 
+  public Integer getArmor() {
+    return Objects.isNull(item) ? 0 : item.getArmor();
+  }
+
+  public Integer getMaxDexBonus() {
+    return Objects.isNull(item) ? Integer.MAX_VALUE : item.getMaxDexBonus();
+  }
+
   private OutfitItem replace(OutfitItem newOutfit) {
     OutfitItem oldOutfit = item;
     item = newOutfit;
