@@ -1,9 +1,7 @@
 package ru.gvrn.journeyman.characters;
 
 import ru.gvrn.journeyman.items.OutfitItem;
-import ru.gvrn.journeyman.observers.api.Info;
-import ru.gvrn.journeyman.observers.api.Observable;
-import ru.gvrn.journeyman.observers.api.Observer;
+import ru.gvrn.journeyman.observers.SupportObservable;
 import ru.gvrn.journeyman.outfits.api.Outfitter;
 
 import java.util.ArrayList;
@@ -11,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Body implements Outfitter<OutfitItem>, Observable {
+public class Body extends SupportObservable implements Outfitter<OutfitItem> {
   private final List<BodyPart> parts = new ArrayList<>(); // Возможно нужен класс BodyParts в котором и лежит List<BodyPart>
 
   public void add(BodyPart part) {
@@ -41,25 +39,5 @@ public class Body implements Outfitter<OutfitItem>, Observable {
         .map(bp -> bp.unequip(uuid))
         .filter(Objects::nonNull)
         .collect(Collectors.toList());
-  }
-
-  @Override
-  public void add(Observer observer) {
-
-  }
-
-  @Override
-  public void delete(Observer observer) {
-
-  }
-
-  @Override
-  public void deleteObservers() {
-
-  }
-
-  @Override
-  public void notify(Info info) {
-
   }
 }

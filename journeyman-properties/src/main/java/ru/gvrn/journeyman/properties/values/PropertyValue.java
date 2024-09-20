@@ -1,20 +1,13 @@
 package ru.gvrn.journeyman.properties.values;
 
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
+import ru.gvrn.journeyman.observers.SupportObservable;
 import ru.gvrn.journeyman.observers.api.Info;
-import ru.gvrn.journeyman.observers.api.Observable;
-import ru.gvrn.journeyman.observers.api.Observer;
 import ru.gvrn.journeyman.properties.PropertyInfo;
 import ru.gvrn.journeyman.properties.api.Value;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class PropertyValue<T> implements Value<T>, Observable {
-  private final List<Observer> observers = new ArrayList<>();
-
+public class PropertyValue<T> extends SupportObservable implements Value<T> {
   @Getter
   protected final String name;
 
@@ -41,26 +34,6 @@ public class PropertyValue<T> implements Value<T>, Observable {
     Value<T> pv = new PropertyValue<>(valueName, value);
     pv.setOwnerName(ownerName);
     return pv;
-  }
-
-  @Override
-  public void add(@NonNull Observer observer) {
-    observers.add(observer);
-  }
-
-  @Override
-  public void delete(Observer observer) {
-    observers.remove(observer);
-  }
-
-  @Override
-  public void deleteObservers() {
-    observers.clear();
-  }
-
-  @Override
-  public void notify(@NonNull Info info) {
-    observers.forEach(obs -> obs.update(info));
   }
 
   protected String getPropertyIdentifier() {
