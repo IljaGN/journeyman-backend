@@ -50,6 +50,8 @@ public class OutfitItem extends Item implements Outfit<OutfitItem> {
             .filter(acceptor -> slotId.equals(acceptor.getSlotId()))
             .findFirst().get();
         suitableAcceptors.remove(firstAcc);
+        // TODO: добавить логику что бы свободные части заполнялись первыми, сейчас заполняется
+        //  первая найденная часть, которая уже может быть экипирована, хотя в коллекция так же могут быть пустые
         OutfitItem unequip = firstAcc.equip(this);
         if (Objects.nonNull(unequip)) {
           result.add(unequip);
