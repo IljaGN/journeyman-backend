@@ -1,5 +1,6 @@
-package ru.gvrn.journeyman.engine;
+package ru.gvrn.journeyman.engine.properties;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.DefaultTestContextBootstrapper;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import ru.gvrn.journeyman.engine.properties.PropertyHolder;
+import ru.gvrn.journeyman.characters.Body;
+import ru.gvrn.journeyman.engine.EngineApp;
 import ru.gvrn.journeyman.properties.api.Property;
 
 import java.util.HashMap;
@@ -25,9 +27,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestPropertySource(properties = "dnd_properties.csv")
 @ContextConfiguration(classes = EngineApp.class)
 class PropertyHolderTest {
-
   @Autowired
   private PropertyHolder propertyHolder;
+
+  @BeforeEach
+  void beforeTest() {
+    propertyHolder.handle(new Body());
+  }
 
   @Test
   public void linkProperties_isCorrect() {

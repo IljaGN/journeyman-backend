@@ -1,10 +1,9 @@
-package ru.gvrn.journeyman.engine;
+package ru.gvrn.journeyman.engine.properties;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import ru.gvrn.journeyman.engine.properties.PropertyValueDefinitionSource;
 import ru.gvrn.journeyman.engine.properties.models.PropertyDefinition;
 import ru.gvrn.journeyman.properties.api.Property;
 import ru.gvrn.journeyman.properties.types.BooleanProperty;

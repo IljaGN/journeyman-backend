@@ -1,4 +1,4 @@
-package ru.gvrn.journeyman.engine;
+package ru.gvrn.journeyman.engine.properties;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,7 +10,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.DefaultTestContextBootstrapper;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import ru.gvrn.journeyman.engine.properties.PropertyDefinitionSource;
+import ru.gvrn.journeyman.engine.EngineApp;
 import ru.gvrn.journeyman.engine.properties.models.PropertyDefinition;
 
 import java.util.NoSuchElementException;
