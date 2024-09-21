@@ -7,6 +7,8 @@ import ru.gvrn.journeyman.observers.api.Info;
 import ru.gvrn.journeyman.properties.PropertyInfo;
 import ru.gvrn.journeyman.properties.api.Value;
 
+import java.util.Objects;
+
 public class PropertyValue<T> extends SupportObservable implements Value<T> {
   @Getter
   protected final String name;
@@ -24,6 +26,10 @@ public class PropertyValue<T> extends SupportObservable implements Value<T> {
 
   @Override
   public void setValue(T value) {
+    if (Objects.equals(this.value, value)) {
+      return;
+    }
+
     Info info = new PropertyInfo(getPropertyIdentifier(), this.value, value);
     this.value = value;
     notify(info);

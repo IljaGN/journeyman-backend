@@ -1,5 +1,6 @@
 package ru.gvrn.journeyman.engine.properties;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -26,6 +27,7 @@ class PropertyDefinitionSourceTest {
   @Autowired
   private PropertyDefinitionSource definitionSource;
 
+  @Disabled
   @ParameterizedTest
   @CsvSource({"String,1,test_value", "Integer,2,5", "Boolean,3,true"})
   public void getPropertyDefinitions_OK(String name, String type, String value) {

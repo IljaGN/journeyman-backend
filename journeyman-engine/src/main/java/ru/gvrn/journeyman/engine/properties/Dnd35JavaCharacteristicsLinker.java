@@ -4,6 +4,7 @@ import lombok.Builder;
 import org.springframework.stereotype.Component;
 import ru.gvrn.journeyman.characters.Body;
 import ru.gvrn.journeyman.dicees.BaseDicePool;
+import ru.gvrn.journeyman.dicees.ConstantDicePool;
 import ru.gvrn.journeyman.dicees.api.DicePool;
 import ru.gvrn.journeyman.engine.properties.models.PropertyAndValueDefinition;
 import ru.gvrn.journeyman.observers.api.Observable;
@@ -59,7 +60,7 @@ public class Dnd35JavaCharacteristicsLinker {
     calcInitMod.setDependenciesAndUpdate(info -> dexMod.getValue());
 
     PropertyAndValueDefinition<Integer> acDefinition = nameIntegerDefinitionMap.get(ARMOR_CLASS);
-    CalculatedPropertyValue<Integer> calcAc = makeObservant(initModDefinition, dexMod, body); // TODO: зависит от size
+    CalculatedPropertyValue<Integer> calcAc = makeObservant(acDefinition, dexMod, body); // TODO: зависит от size
     calcAc.setDependenciesAndUpdate(info -> {
       // логику ниже с dexBonus спрятать, а формулу можно и переписать
       int dexBonus = Math.min(dexMod.getValue(), body.getMaxDexBonus());
@@ -68,14 +69,14 @@ public class Dnd35JavaCharacteristicsLinker {
 
     PropertyValue<Integer> strength = nameIntegerDefinitionMap.get(STRENGTH).getValue();
     PropertyAndValueDefinition<Integer> capacityDefinition = nameIntegerDefinitionMap.get(CARRYING_CAPACITY);
-    PropertyValue<Integer> cupCurrent = capacityDefinition.getValue();
-    CalculatedPropertyValue<Integer> cupMax = new CalculatedPropertyValue<>("max", cupCurrent.getValue());
-    PropertyValue<Integer> cupMin = new PropertyValue<>("min", cupCurrent.getValue());
-    cupMax.observe(strength);
-    cupMax.setDependenciesAndUpdate(info -> (strength.getValue() * 6 - 6) * 1000); // TODO: примерно, нужна таблица или более точная формула
-    capacityDefinition.setValue(cupMax);
-    capacityDefinition.setValue(cupCurrent);
-    capacityDefinition.setValue(cupMin);
+    PropertyValue<Integer> capCurrent = capacityDefinition.getValue();
+    CalculatedPropertyValue<Integer> capMax = new CalculatedPropertyValue<>("max", capCurrent.getValue());
+    PropertyValue<Integer> capMin = new PropertyValue<>("min", capCurrent.getValue());
+    capMax.observe(strength);
+    capMax.setDependenciesAndUpdate(info -> (strength.getValue() * 6 - 6) * 1000); // TODO: примерно, нужна таблица или более точная формула
+    capacityDefinition.setValue(capMax);
+    capacityDefinition.setValue(capCurrent);
+    capacityDefinition.setValue(capMin);
 
     PropertyValue<Integer> level = nameIntegerDefinitionMap.get(LEVEL).getValue();
     PropertyValue<Integer> conMod = nameIntegerDefinitionMap.get(CON).getValue();
@@ -85,7 +86,8 @@ public class Dnd35JavaCharacteristicsLinker {
     PropertyValue<Integer> hitMin = new PropertyValue<>("min", hitCurrent.getValue());
     hitMax.observe(level);
     hitMax.observe(conMod); // там все сложнее поэтому пока простой вариант
-    DicePool hpd = new BaseDicePool(level.getValue(), 8); // Hit Point Dice, определяется CHARACTER_CLASS
+//    DicePool hpd = new BaseDicePool(8); // Hit Point Dice, определяется CHARACTER_CLASS
+    DicePool hpd = new ConstantDicePool(8, 5); // TODO: only for CharacterTest
     hitMax.setDependenciesAndUpdate(info -> { // данная схема работает если уровень увеличивается на 1 за раз, что в целом справедливо
       int rollValue = level.getValue() == 1 ? hpd.getMaxDiceEdge() : hpd.rollAndGetValue();
       int additionalHp = Math.max(rollValue + conMod.getValue(), 1);

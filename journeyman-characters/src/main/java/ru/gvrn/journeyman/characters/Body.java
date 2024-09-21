@@ -19,7 +19,8 @@ public class Body extends SupportObservable implements Outfitter<OutfitItem> {
   @Getter
   private int maxDexBonus = Integer.MAX_VALUE;
   @Getter
-  private int armorClass = 0;
+  private int armorClass = 0; // getNonFreeBodyPartStream() тут надо подумать возможно сама часть тела может иметь некий показатель
+  // Но в целом думаю это не нужно можно заложить повышенное сопротивление в базовый бонус брони и не усложнять
   // end
 
   public void add(BodyPart part) {
@@ -52,6 +53,7 @@ public class Body extends SupportObservable implements Outfitter<OutfitItem> {
     return unequipItems;
   }
 
+  // TODO: еще лучше делать расчет прямо в гетерах. У самой вещи могут измениться значения показателя
   protected void updateParametersAndNotify() {
     int totalArmor = getNonFreeBodyPartStream().mapToInt(BodyPart::getArmor).sum();
     int dexLimit = getNonFreeBodyPartStream().mapToInt(BodyPart::getMaxDexBonus)

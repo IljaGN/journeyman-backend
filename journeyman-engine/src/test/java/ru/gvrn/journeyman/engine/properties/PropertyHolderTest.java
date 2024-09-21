@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.BootstrapWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.DefaultTestContextBootstrapper;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
@@ -20,11 +19,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static ru.gvrn.journeyman.engine.constants.Dnd35ChPropertyNames.*;
 
 @ExtendWith(SpringExtension.class)
 @TestExecutionListeners(DependencyInjectionTestExecutionListener.class)
 @BootstrapWith(DefaultTestContextBootstrapper.class)
-@TestPropertySource(properties = "dnd_properties.csv")
 @ContextConfiguration(classes = EngineApp.class)
 class PropertyHolderTest {
   @Autowired
@@ -44,37 +43,56 @@ class PropertyHolderTest {
 
     actNameValueMap.forEach((name, value) -> namePropertyMap.get(name).replaceValue(value));
     expNameValueMap.forEach((name, value) -> {
-      if ("Total Hit Points".equals(name)) {
-        Integer exp = (Integer) value;
-        Integer hit = (Integer) namePropertyMap.get(name).getValue();
-        assertTrue(exp < hit);
-      } else {
-        assertEquals(value, namePropertyMap.get(name).getValue());
+      switch (name) {
+        case TOTAL_HIT_POINTS:
+          Integer exp = (Integer) value;
+          Property hitProperty = namePropertyMap.get(name);
+          hitProperty.resetOnDefault();
+          Integer hit = (Integer) hitProperty.getValue();
+          assertTrue(exp < hit);
+          break;
+        case CARRYING_CAPACITY:
+          Property capProperty = namePropertyMap.get(name);
+          assertEquals(0, capProperty.getValue());
+          capProperty.resetOnDefault();
+          assertEquals(value, capProperty.getValue());
+          break;
+        default:
+          assertEquals(value, namePropertyMap.get(name).getValue());
       }
     });
   }
 
   private Map<String, Object> getModValuesMap() {
     Map<String, Object> map = new HashMap<>();
-    map.put("STR", -2);
-    map.put("DEX", -1);
-    map.put("CON", 0);
-    map.put("INT", 1);
-    map.put("WIS", 2);
-    map.put("CHA", 3);
-    map.put("Total Hit Points", 8);
+    map.put(STR, -2);
+    map.put(DEX, -1);
+    map.put(CON, 0);
+    map.put(INT, 1);
+    map.put(WIS, 2);
+    map.put(CHA, 3);
+    map.put(FORTITUDE, 2); // CON + X_BONUS
+    map.put(REFLEX, 0); // DEX + X_BONUS
+    map.put(WILL, 3); // WIS + X_BONUS
+    map.put(INITIATIVE_MOD, -1); // DEX
+    map.put(ARMOR_CLASS, 9); // 10 + DEX
+    map.put(CARRYING_CAPACITY, 36000); // STRENGTH * 6 - 6
+    map.put(TOTAL_HIT_POINTS, 8);
     return map;
   }
 
   private Map<String, Object> getChValuesMap() {
     Map<String, Object> map = new HashMap<>();
-    map.put("Strength", 7);
-    map.put("Dexterity", 9);
-    map.put("Constitution", 10);
-    map.put("Intelligence", 13);
-    map.put("Wisdom", 14);
-    map.put("Charisma", 16);
-    map.put("Level", 2);
+    map.put(STRENGTH, 7);
+    map.put(DEXTERITY, 9);
+    map.put(CONSTITUTION, 10);
+    map.put(INTELLIGENCE, 13);
+    map.put(WISDOM, 14);
+    map.put(CHARISMA, 16);
+    map.put(FORTITUDE_BONUS, 2);
+    map.put(REFLEX_BONUS, 1);
+    map.put(WILL_BONUS, 1);
+    map.put(LEVEL, 2);
     return map;
   }
 }
