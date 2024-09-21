@@ -1,8 +1,12 @@
 name,type,value
 Character Name,1,Empty Name
 Class,1,Empty Class
-Size,1,M
+Race,1,Empty Race
+Alignment,1,TN
+Age,2,15
+Weight,2,170
 Level,2,1
+Size,1,M
 Strength,2,10
 Dexterity,2,10
 Constitution,2,10
@@ -15,6 +19,15 @@ CON,2,0
 INT,2,0
 WIS,2,0
 CHA,2,0
+Initiative Modifier,2,0
+Fortitude,2,0
+Reflex,2,0
+Will,2,0
+Fortitude Save Bonus,2,0
+Reflex Save Bonus,2,0
+Will Save Bonus,2,0
+Base Attack Bonus,2,0
 Total Hit Points,2,0
-Speed,2,20
+Armor Class,2,0
 Carrying Capacity,2,0
+Speed,2,20

@@ -5,6 +5,7 @@ import ru.gvrn.journeyman.items.OutfitItem;
 import ru.gvrn.journeyman.outfits.api.Outfitter;
 import ru.gvrn.journeyman.properties.api.Property;
 import ru.gvrn.journeyman.properties.types.IntegerProperty;
+import ru.gvrn.journeyman.properties.types.IntegerRestrictedProperty;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -19,13 +20,13 @@ public class Character implements Outfitter<OutfitItem> {
   protected final Map<String, Item> uuidItemMap = new HashMap<>();
   protected final Body body;
 
-  private IntegerProperty carryingCapacity; //IntegerRestrictedProperty
+  private IntegerRestrictedProperty carryingCapacity;
   private IntegerProperty armorClass;
 
   public Character(Map<String, Property<?>> characteristics, Body body) {
     this.characteristics = new HashMap<>(characteristics);
     this.body = body;
-    carryingCapacity = (IntegerProperty) characteristics.get("Carrying Capacity");
+    carryingCapacity = (IntegerRestrictedProperty) characteristics.get("Carrying Capacity");
     armorClass = (IntegerProperty) characteristics.get("Armor Class");
   }
 
@@ -69,6 +70,8 @@ public class Character implements Outfitter<OutfitItem> {
   }
 
   protected void updateCarryingCapacity() {
+    // TODO: это свойство так же должно следить за весом самих предметов в инвентаре, так как вес предмета
+    //  может измениться. А перекладки нет carryingCapacity.value += newItemW - oldItemW
     carryingCapacity.replaceValue(uuidItemMap.values().stream()
         .mapToInt(Item::getWeight).sum()
     );

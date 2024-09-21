@@ -11,6 +11,7 @@ import ru.gvrn.journeyman.engine.properties.models.PropertyDefinition;
 import ru.gvrn.journeyman.properties.api.Property;
 import ru.gvrn.journeyman.properties.types.BooleanProperty;
 import ru.gvrn.journeyman.properties.types.IntegerProperty;
+import ru.gvrn.journeyman.properties.types.IntegerRestrictedProperty;
 import ru.gvrn.journeyman.properties.types.StringProperty;
 import ru.gvrn.journeyman.properties.values.PropertyValue;
 
@@ -91,7 +92,12 @@ public class PropertyValueDefinitionSource {
       Collection<? extends PropertyValue<?>> anotherValues = def.getValues();
       anotherValues.remove(current);
       Constructor<?>[] constructors = propertyClass.getDeclaredConstructors();
-      Property<?> property = createProperty(constructors, name, current, anotherValues);
+      int constructorIndex = anotherValues.size();
+      if (propertyClass.equals(IntegerProperty.class) && anotherValues.size() > 1) {
+        constructors = IntegerRestrictedProperty.class.getDeclaredConstructors();
+        constructorIndex = 0;
+      }
+      Property<?> property = createProperty(constructors, name, current, anotherValues, constructorIndex);
       result.put(name, property);
     });
     return result;
@@ -99,14 +105,14 @@ public class PropertyValueDefinitionSource {
 
   @SneakyThrows
   private Property<?> createProperty(Constructor<?>[] constructors, String name, PropertyValue<?> current,
-                                     Collection<? extends PropertyValue<?>> anotherValues) {
+                                     Collection<? extends PropertyValue<?>> anotherValues, int ci) {
     Object[] args = new Object[anotherValues.size() + 2];
     args[0] = name;
     args[1] = current;
     Iterator<? extends PropertyValue<?>> iterator = anotherValues.iterator();
-    for (int i = 1; iterator.hasNext(); i++) {
+    for (int i = 2; iterator.hasNext(); i++) {
       args[i] = iterator.next();
     }
-    return (Property<?>) constructors[anotherValues.size()].newInstance(args); // TODO:not save
+    return (Property<?>) constructors[ci].newInstance(args); // TODO:not save
   }
 }
