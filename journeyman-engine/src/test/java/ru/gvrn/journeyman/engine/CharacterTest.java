@@ -123,7 +123,7 @@ class CharacterTest {
     Property<?> hitPoints = characteristics.get(TOTAL_HIT_POINTS);
     for (int lvl = 1; lvl < 5; lvl++) {
       int expHitPointsValue = 8;
-      expHitPointsValue += 5 * (lvl - 1);
+      expHitPointsValue += 5*(lvl - 1);
 
       level.replaceValue(lvl);
       hitPoints.resetOnDefault(); // current == max(observe -> level)

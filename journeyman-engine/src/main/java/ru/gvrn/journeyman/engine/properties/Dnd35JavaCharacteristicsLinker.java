@@ -3,7 +3,6 @@ package ru.gvrn.journeyman.engine.properties;
 import lombok.Builder;
 import org.springframework.stereotype.Component;
 import ru.gvrn.journeyman.characters.Body;
-import ru.gvrn.journeyman.dicees.BaseDicePool;
 import ru.gvrn.journeyman.dicees.ConstantDicePool;
 import ru.gvrn.journeyman.dicees.api.DicePool;
 import ru.gvrn.journeyman.engine.properties.models.PropertyAndValueDefinition;
@@ -73,7 +72,7 @@ public class Dnd35JavaCharacteristicsLinker {
     CalculatedPropertyValue<Integer> capMax = new CalculatedPropertyValue<>("max", capCurrent.getValue());
     PropertyValue<Integer> capMin = new PropertyValue<>("min", capCurrent.getValue());
     capMax.observe(strength);
-    capMax.setDependenciesAndUpdate(info -> (strength.getValue() * 6 - 6) * 1000); // TODO: примерно, нужна таблица или более точная формула
+    capMax.setDependenciesAndUpdate(info -> (strength.getValue()*6 - 6)*1000); // TODO: примерно, нужна таблица или более точная формула
     capacityDefinition.setValue(capMax);
     capacityDefinition.setValue(capCurrent);
     capacityDefinition.setValue(capMin);
@@ -108,7 +107,7 @@ public class Dnd35JavaCharacteristicsLinker {
   }
 
   private static int calculateModifier(int characteristic) {
-    return characteristic / 2 - 5;
+    return characteristic/2 - 5;
   }
 
   @Builder

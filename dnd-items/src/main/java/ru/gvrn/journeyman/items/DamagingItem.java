@@ -16,9 +16,6 @@ public class DamagingItem extends Item { // и нужен интерфейс Dam
   // Метод возвращающий урон
 
 
-
-
-
   // TODO: это должно быть в каком-то своем модуле но я пока не понял в каком
   public interface Damage {
     boolean isCritical(int naturalD20Value);
@@ -58,7 +55,7 @@ public class DamagingItem extends Item { // и нужен интерфейс Dam
 
     @Override
     public void causeCritical(Map<String, Property<?>> characteristics, int times) {
-      makeDamage(characteristics, times * criticalMultiplier);
+      makeDamage(characteristics, times*criticalMultiplier);
     }
 
     protected void makeDamage(Map<String, Property<?>> characteristics, int multiplier) {
