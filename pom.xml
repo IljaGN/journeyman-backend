@@ -26,6 +26,7 @@
     <module>dnd-items</module>
     <module>journeyman-support-api</module>
     <module>journeyman-engine</module>
+    <module>journeyman-damages-api</module>
   </modules>
 
   <dependencyManagement>
