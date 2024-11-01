@@ -152,7 +152,6 @@ class CharacterTest {
     assertEquals(expFullPlateArmorClassValue, armorClass.getValue());
   }
 
-
   private Stream<Arguments> addInInventoryOkDp() {
     return Stream.of(
         Arguments.of(List.of(), 0),
