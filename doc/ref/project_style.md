@@ -181,7 +181,7 @@ var = someMethod1(expression1, expression4); // OK
 
 Тернарный оператор:
 ```java
-// Точно не нужно совмещать несклько тернарных операторов в однов выражении:
+// Точно не нужно совмещать несколько тернарных операторов в одном выражении:
 var = booleanExpression1 ? expression1 : booleanExpression2 ? expression2 : expression3;
 
 // Если выражения простые для восприятия запишите в одну строку:
@@ -205,6 +205,11 @@ return suitableAcceptors.stream()
         .map(acceptor -> acceptor.equip(this))
         .filter(Objects::nonNull)
         .collect(Collectors.toList());
+return map.entrySet().stream()
+        .map(Map.Entry::getValue)
+        .filter(Objects::nonNull)
+        .collect(Collectors.toList());
+
 // Если нужно достать глубокий элемент:
 return deepSource1.getDeepSource2()
         .getDeepSource3()
