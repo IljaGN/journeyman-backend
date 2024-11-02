@@ -29,6 +29,7 @@
     <module>journeyman-damages-api</module>
     <module>journeyman-damages</module>
     <module>journeyman-attacks-api</module>
+    <module>dnd-attacks</module>
   </modules>
 
   <dependencyManagement>

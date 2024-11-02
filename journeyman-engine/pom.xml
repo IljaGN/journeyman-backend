@@ -18,11 +18,6 @@
       <artifactId>journeyman-characters</artifactId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
-    <dependency>
-      <groupId>ru.gvrn.journeyman.damages</groupId>
-      <artifactId>journeyman-damages</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-    </dependency>
 
     <dependency>
       <groupId>org.springframework</groupId>

@@ -8,35 +8,25 @@
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>ru.gvrn.journeyman.items</groupId>
-  <artifactId>dnd-items</artifactId>
+  <groupId>ru.gvrn.journeyman.dnd.attacks</groupId>
+  <artifactId>dnd-attacks</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
   <dependencies>
     <dependency>
-      <groupId>ru.gvrn.journeyman.outfits.api</groupId>
-      <artifactId>journeyman-outfits-api</artifactId>
+      <groupId>ru.gvrn.journeyman.attacks.api</groupId>
+      <artifactId>journeyman-attacks-api</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>ru.gvrn.journeyman.damages.api</groupId>
+      <artifactId>journeyman-damages-api</artifactId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>ru.gvrn.journeyman.dicees</groupId>
       <artifactId>journeyman-dicees</artifactId>
       <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>ru.gvrn.journeyman.properties.types</groupId>
-      <artifactId>d20-properties-types</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>ru.gvrn.journeyman.damages</groupId>
-      <artifactId>journeyman-damages</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
     </dependency>
   </dependencies>
 </project>

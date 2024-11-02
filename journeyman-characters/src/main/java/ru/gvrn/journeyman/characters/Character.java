@@ -1,5 +1,9 @@
 package ru.gvrn.journeyman.characters;
 
+import ru.gvrn.journeyman.attacks.api.Attack;
+import ru.gvrn.journeyman.attacks.api.Attacking;
+import ru.gvrn.journeyman.dnd.attacks.DndAttack;
+import ru.gvrn.journeyman.items.DamagingItem;
 import ru.gvrn.journeyman.items.Item;
 import ru.gvrn.journeyman.items.OutfitItem;
 import ru.gvrn.journeyman.support.api.Characteristics;
@@ -15,7 +19,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Character implements Outfitter<OutfitItem>, Characteristics {
+public class Character implements Outfitter<OutfitItem>, Characteristics, Attacking {
   protected final Map<String, Property<?>> characteristics;
 
   protected final Map<String, Item> uuidItemMap = new HashMap<>();
@@ -73,6 +77,14 @@ public class Character implements Outfitter<OutfitItem>, Characteristics {
         .collect(Collectors.toList());
     updateCarryingCapacity();
     return removeItems;
+  }
+
+  @Override
+  public Attack getAttack(String damagingUuid, String mode) {
+    // Тут должна быть сущность более высокого порядка Damaging так как уроном может обладать не только оружие
+    // например заклинания(огненный шар :)
+    DamagingItem weapon = (DamagingItem) uuidItemMap.get(damagingUuid);
+    return new DndAttack(null, 3, weapon.getDamage(mode));
   }
 
   protected void updateCarryingCapacity() {
