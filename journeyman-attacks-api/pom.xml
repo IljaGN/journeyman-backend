@@ -8,15 +8,14 @@
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>ru.gvrn.journeyman.support-api</groupId>
-  <artifactId>journeyman-support-api</artifactId>
+  <groupId>ru.gvrn.journeyman.attacks.api</groupId>
+  <artifactId>journeyman-attacks-api</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
   <dependencies>
-    <!-- FIXME: Циклическая ссылка -->
     <dependency>
-      <groupId>ru.gvrn.journeyman.properties.api</groupId>
-      <artifactId>journeyman-properties-api</artifactId>
+      <groupId>ru.gvrn.journeyman.support-api</groupId>
+      <artifactId>journeyman-support-api</artifactId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
   </dependencies>

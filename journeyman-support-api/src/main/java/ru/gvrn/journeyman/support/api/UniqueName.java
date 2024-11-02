@@ -1,4 +1,4 @@
-package ru.gvrn.journeyman.outfits.api;
+package ru.gvrn.journeyman.support.api;
 
 public interface UniqueName {
   String getName();

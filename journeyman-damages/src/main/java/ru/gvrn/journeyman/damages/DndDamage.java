@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Builder
-public class dndDamage implements Damage {
+public class DndDamage implements Damage {
   public static final String CURRENT_HIT_POINTS_PROPERTY_NAME = "Current Hit Points";
 
   private final String type;

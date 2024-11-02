@@ -7,6 +7,7 @@ Journeyman Backend
 Модули проекта:
 - [d20-properties-types](d20-properties-types/readme.md)
 - [dnd-items](dnd-items/readme.md)
+- [journeyman-attacks-api]
 - [journeyman-characters](journeyman-characters/readme.md)
 - [journeyman-damages]
 - [journeyman-damages-api]

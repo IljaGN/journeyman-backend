@@ -1,5 +1,7 @@
 package ru.gvrn.journeyman.outfits.api;
 
+import ru.gvrn.journeyman.outfits.api.Outfit;
+
 import java.util.List;
 
 // Тот кто имеет возможность экипироваться

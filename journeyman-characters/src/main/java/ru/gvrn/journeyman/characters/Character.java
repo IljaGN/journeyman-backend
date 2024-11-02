@@ -2,6 +2,7 @@ package ru.gvrn.journeyman.characters;
 
 import ru.gvrn.journeyman.items.Item;
 import ru.gvrn.journeyman.items.OutfitItem;
+import ru.gvrn.journeyman.support.api.Characteristics;
 import ru.gvrn.journeyman.outfits.api.Outfitter;
 import ru.gvrn.journeyman.properties.api.Property;
 import ru.gvrn.journeyman.properties.types.IntegerProperty;
@@ -14,7 +15,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Character implements Outfitter<OutfitItem> {
+public class Character implements Outfitter<OutfitItem>, Characteristics {
   protected final Map<String, Property<?>> characteristics;
 
   protected final Map<String, Item> uuidItemMap = new HashMap<>();
@@ -28,6 +29,11 @@ public class Character implements Outfitter<OutfitItem> {
     this.body = body;
     carryingCapacity = (IntegerRestrictedProperty) characteristics.get("Carrying Capacity");
     armorClass = (IntegerProperty) characteristics.get("Armor Class");
+  }
+
+  @Override
+  public Map<String, Property<?>> getCharacteristics() {
+    return characteristics;
   }
 
   public List<Item> equipFormInventory(List<String> uuids) {

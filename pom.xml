@@ -28,6 +28,7 @@
     <module>journeyman-engine</module>
     <module>journeyman-damages-api</module>
     <module>journeyman-damages</module>
+    <module>journeyman-attacks-api</module>
   </modules>
 
   <dependencyManagement>
