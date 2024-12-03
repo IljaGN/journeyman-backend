@@ -21,9 +21,5 @@ jobs:
         distribution: 'temurin'
         architecture: x64
         cache: 'maven'
-    - name: Java Test Version
-      run: java -Xinternalversion
-    - name: Maven Version
-      run: mvn -v
-    - name: Maven Test
+    - name: Maven Build and Test
       run: mvn clean test
