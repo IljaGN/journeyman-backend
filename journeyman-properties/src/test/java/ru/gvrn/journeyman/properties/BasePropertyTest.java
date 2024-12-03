@@ -35,7 +35,7 @@ class BasePropertyTest {
     assertEquals(PROPERTY_NAME, property.getName());
     assertEquals(INITIAL_VALUE, property.getValue());
     verify(current).getInstance(DEFAULT_NAME);
-    verify(current).setOwnerName(PROPERTY_NAME);
+    verify(current).setOwnerName("gjfgjfjg");
   }
 
   @ParameterizedTest
