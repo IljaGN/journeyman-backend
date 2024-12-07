@@ -4,6 +4,42 @@ Journeyman Backend
 Ознакомьтесь с [Project Style](doc/ref/project_style.md) см. описание
 из [journeyman-engine](journeyman-engine/readme.md)
 
+Сборка проекта
+------------------------------------------------------------
+
+Для сборки необходим JDK 11 (использовал OpenJDK). Maven (использовал версию 3.8.1). Используйте Git
+для управления версиями исходного кода. Перейдите в каталог для установки/разработки
+приложения и выполните следующие команды:
+
+### Установка: ###
+
+**Чтобы скачать по ssh**:
+```bash
+git clone git@github.com:IljaGN/journeyman-backend.git
+```
+
+Чтобы скачать по https:
+```bash
+git clone https://github.com/IljaGN/journeyman-backend.git
+```
+
+Перейдите в скачанный каталог:
+```bash
+cd journeyman-backend/
+```
+
+Убедитесь что нет проблем и операция прошла успешно:
+```bash
+git status
+```
+
+### Сборка: ###
+
+Выполните следующие команды:
+```bash
+mvn clean test
+```
+
 Модули проекта:
 - [d20-properties-types](d20-properties-types/readme.md)
 - [dnd-items](dnd-items/readme.md)
